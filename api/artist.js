@@ -30,7 +30,7 @@ artistRouter.param('artistId', (req, res, next, artistId) => {
 })
 
 artistRouter.get('/:artistId', (req, res, next) => {
-    res.status(200).json({ artist: req.artist })
+    res.status(200).send({ artist: req.artist })
 })
 
 const validateArtist = (req, res, next) => {
