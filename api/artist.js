@@ -86,7 +86,21 @@ artistRouter.put('/:artistId', validateArtist, (req, res, next) => {
 })
 
 artistRouter.delete('/:artistId', (req, res, next) => {
+    const sql = 'UPDATE Artist SET is_currently_employed = $isCurrentlyEmployed WHERE Artist.id = $artistId';
+    const values = {
+        $isCurrentlyEmployed: 0,
+        $artistId: req.params.artistId
+    };
 
+    db.run(sql, values, (err) => {
+        if (err) {
+            next(err);
+        } else {
+            db.get(`SELECT * FROM Artist WHERE id = ${req.params.artistId}`, (err, deletedArtist) => {
+                res.status(200).send({ artist: deletedArtist });
+            })
+        }
+    });
 })
 
 
