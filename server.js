@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const apiRouter = require('./api/api');
 const artistRouter = require('./api/artist');
