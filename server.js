@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 const apiRouter = require('./api/api');
 const artistRouter = require('./api/artist');
 const seriesRouter = require('./api/series');
+const issuesRouter = require('./api/issues');
 
 app.use(bodyParser.json());
 app.use(errorhandler());
@@ -20,6 +21,8 @@ app.use(morgan('dev'));
 app.use('/api', apiRouter);
 app.use('/api/artists', artistRouter);
 app.use('/api/series', seriesRouter);
+app.use('/api/series/:seriesId/issues', issuesRouter);
+
 
 
 

@@ -19,4 +19,16 @@ db.serialize(() => {
         description TEXT NOT NULL,
         PRIMARY KEY('id')
     )`);
+    db.run(`DROP TABLE IF EXISTS Issue`);
+    db.run(`CREATE TABLE IF NOT EXISTS Issue (
+        id INTEGER, 
+        name TEXT NOT NULL,
+        issue_number INTEGER NOT NULL,
+        publication_date TEXT NOT NULL,
+        artist_id INTEGER NOT NULL,
+        series_id INTEGER NOT NULL,
+        PRIMARY KEY('id'),
+        FOREIGN KEY(artist_id) REFERENCES Artist(id),
+        FOREIGN KEY(series_id) REFERENCES Series(id)
+    )`)
 })
