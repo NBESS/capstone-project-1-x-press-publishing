@@ -1,8 +1,10 @@
 const express = require('express');
 const seriesRouter = express.Router();
 const sqlite3 = require('sqlite3');
+const issuesRouter = require('./issues');
 
-const db = new sqlite3.Database(process.env.TEST_DATABASE || './database/sqlite');
+const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
+
 
 
 seriesRouter.get('/', (req, res, next) => {
@@ -30,6 +32,8 @@ seriesRouter.param('seriesId', (req, res, next, seriesId) => {
         }
     })
 })
+
+seriesRouter.use('/:seriesId/issues', issuesRouter);
 
 seriesRouter.get('/:seriesId', (req, res, next) => {
     res.status(200).json({ series: req.series });

@@ -1,32 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const errorhandler = require('errorhandler');
 const morgan = require('morgan');
+const errorhandler = require('errorhandler');
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 
 const apiRouter = require('./api/api');
-const artistRouter = require('./api/artist');
-const seriesRouter = require('./api/series');
-const issuesRouter = require('./api/issues');
 
 app.use(bodyParser.json());
-app.use(errorhandler());
 app.use(cors());
 app.use(morgan('dev'));
 
 app.use('/api', apiRouter);
-app.use('/api/artists', artistRouter);
-app.use('/api/series', seriesRouter);
-app.use('/api/series/:seriesId/issues', issuesRouter);
+
+app.use(errorhandler());
 
 
-
-
-app.listen(PORT, () => console.log(`Listening: Port ${PORT}`));
+app.listen(PORT, () =>
+    console.log(`Listening: Port ${PORT}`)
+);
 
 module.exports = app;
 
